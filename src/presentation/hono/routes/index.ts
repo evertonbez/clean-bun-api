@@ -1,6 +1,6 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { accountRouter } from "./account";
 import { authRouter } from "./auth";
+import { boardsRouter } from "./boards";
 
 const routers = new OpenAPIHono();
 
@@ -8,6 +8,6 @@ const routers = new OpenAPIHono();
 routers.route("/api/auth", authRouter);
 
 // Private routes
-routers.route("/accounts", accountRouter);
+routers.route("/boards", boardsRouter);
 
 export { routers };
