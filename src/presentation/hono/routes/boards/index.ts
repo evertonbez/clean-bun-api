@@ -2,6 +2,7 @@ import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { boardSchema, createBoardSchema } from "./schema";
 import { ListBoardsUsecase } from "@/application/usecases/board/list-boards.usecase";
 import { container } from "tsyringe";
+import { GetBoardUsecase } from "@/application/usecases/board/get-boards.usecase";
 
 const app = new OpenAPIHono();
 
@@ -33,6 +34,40 @@ app.openapi(
     return c.json(
       {
         data: boards,
+      },
+      200
+    );
+  }
+);
+
+app.openapi(
+  createRoute({
+    method: "get",
+    path: "/{id}",
+    summary: "Get a board",
+    description: "Get a board",
+    tags: ["Boards"],
+    responses: {
+      200: {
+        description: "Retrive a board",
+        content: {
+          "application/json": {
+            schema: z.object({
+              data: boardSchema.nullable(),
+            }),
+          },
+        },
+      },
+    },
+  }),
+  async (c) => {
+    const usecase = container.resolve(GetBoardUsecase);
+
+    const board = await usecase.execute(c.req.param("id"));
+
+    return c.json(
+      {
+        data: board,
       },
       200
     );
