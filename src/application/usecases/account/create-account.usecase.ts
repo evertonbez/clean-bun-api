@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import type { UseCase } from "../../../domain/contracts/usecase";
 import type { Account } from "../../../domain/entities/account";
 import type { IAccountRepository } from "../../../domain/repositories/account_repository";
+import type { IMailProvider } from "../../../domain/contracts/mail-provider";
 
 interface CreateAccountInput {
   name: string;
@@ -11,11 +12,19 @@ interface CreateAccountInput {
 export class CreateAccountUsecase implements UseCase {
   constructor(
     @inject("AccountRepository")
-    private readonly accountRepository: IAccountRepository
+    private readonly accountRepository: IAccountRepository,
+    @inject("MailProvider")
+    private readonly mailProvider: IMailProvider
   ) {}
 
   async execute(data: CreateAccountInput): Promise<Account> {
     const account = await this.accountRepository.create(data);
+
+    await this.mailProvider.sendMail({
+      to: "delivered@resend.dev",
+      subject: "Conta Criada",
+      body: `Conta ${account.name} criada com sucesso`,
+    });
 
     return account;
   }
