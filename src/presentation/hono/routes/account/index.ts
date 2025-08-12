@@ -1,16 +1,10 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-import { factoryFindAllAccountsUsecase } from "../../factories/account-factory";
 import { container } from "tsyringe";
-import { FindAllAccountsUsecase } from "../../../application/usecases/account/find-all-accounts.usecase";
-import { CreateAccountUsecase } from "../../../application/usecases/account/create-account.usecase";
+import { FindAllAccountsUsecase } from "../../../../application/usecases/account/find-all-accounts.usecase";
+import { CreateAccountUsecase } from "../../../../application/usecases/account/create-account.usecase";
+import { accountResponseSchema, createAccountSchema } from "./schema";
 
 const app = new OpenAPIHono();
-
-const accountResponseSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  createdAt: z.iso.datetime(),
-});
 
 app.openapi(
   createRoute({
@@ -58,9 +52,7 @@ app.openapi(
         description: "Account data",
         content: {
           "application/json": {
-            schema: z.object({
-              name: z.string(),
-            }),
+            schema: createAccountSchema,
           },
         },
       },

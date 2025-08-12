@@ -4,9 +4,14 @@ import type { IAccountRepository } from "../../domain/repositories/account_repos
 import type { IMailProvider } from "../../domain/contracts/mail-provider";
 import { ResendMailProvider } from "../../infra/mail/resend-mail-provider";
 
-container.registerSingleton<IAccountRepository>(
-  "AccountRepository",
-  PrismaAccountRepository
+export const MailProviderToken = Symbol("MailProvider");
+container.registerSingleton<IMailProvider>(
+  MailProviderToken,
+  ResendMailProvider
 );
 
-container.registerSingleton<IMailProvider>("MailProvider", ResendMailProvider);
+export const AccountRepositoryToken = Symbol("AccountRepository");
+container.registerSingleton<IAccountRepository>(
+  AccountRepositoryToken,
+  PrismaAccountRepository
+);

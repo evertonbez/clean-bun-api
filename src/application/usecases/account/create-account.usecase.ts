@@ -3,6 +3,10 @@ import type { UseCase } from "../../../domain/contracts/usecase";
 import type { Account } from "../../../domain/entities/account";
 import type { IAccountRepository } from "../../../domain/repositories/account_repository";
 import type { IMailProvider } from "../../../domain/contracts/mail-provider";
+import {
+  AccountRepositoryToken,
+  MailProviderToken,
+} from "../../../presentation/container";
 
 interface CreateAccountInput {
   name: string;
@@ -11,9 +15,9 @@ interface CreateAccountInput {
 @injectable()
 export class CreateAccountUsecase implements UseCase {
   constructor(
-    @inject("AccountRepository")
+    @inject(AccountRepositoryToken)
     private readonly accountRepository: IAccountRepository,
-    @inject("MailProvider")
+    @inject(MailProviderToken)
     private readonly mailProvider: IMailProvider
   ) {}
 
