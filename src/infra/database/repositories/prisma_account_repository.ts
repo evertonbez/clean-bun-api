@@ -1,6 +1,6 @@
-import { Account } from "../../../domain/entities/account";
-import type { IAccountRepository } from "../../../domain/repositories/account_repository";
-import { prisma } from "../client";
+import { Account } from "@/domain/entities/account";
+import type { IAccountRepository } from "@/domain/repositories/account_repository";
+import { prisma } from "@/infra/database/client";
 
 export class PrismaAccountRepository implements IAccountRepository {
   async findAll(): Promise<Account[]> {

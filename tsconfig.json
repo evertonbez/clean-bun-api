@@ -26,6 +26,16 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+
+    // Paths
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/domain/*": ["./src/domain/*"],
+      "@/infra/*": ["./src/infra/*"],
+      "@/presentation/*": ["./src/presentation/*"],
+      "@/application/*": ["./src/application/*"]
+    }
   }
 }

@@ -1,8 +1,7 @@
-import { Resend } from "resend";
 import type {
   IMailProvider,
   SendMailData,
-} from "../../domain/contracts/mail-provider";
+} from "@/domain/contracts/mail-provider";
 import { resend } from "../config/resend";
 
 export class ResendMailProvider implements IMailProvider {
