@@ -4,6 +4,7 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import { Scalar } from "@scalar/hono-api-reference";
 import { secureHeaders } from "hono/secure-headers";
 import { routers } from "./routes";
+import { requestId } from "hono/request-id";
 
 export function makeHonoApp() {
   const app = new OpenAPIHono({
@@ -15,6 +16,7 @@ export function makeHonoApp() {
   });
 
   app.use(secureHeaders());
+  app.use(requestId());
 
   app.doc("/openapi", {
     openapi: "3.1.0",
