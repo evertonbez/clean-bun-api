@@ -40,7 +40,7 @@ export function makeHonoApp() {
 
   app.get(
     "/",
-    Scalar({ url: "/openapi", pageTitle: "DDD API", theme: "saturn" })
+    Scalar({ url: "/openapi", pageTitle: "Clean API", theme: "saturn" })
   );
 
   app.route("/", routers);

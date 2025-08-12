@@ -1,1 +1,1 @@
-export * from "@/infra/auth/auth";
+export * from "@/infra/auth/better";
