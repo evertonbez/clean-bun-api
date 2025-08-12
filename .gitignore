@@ -5,7 +5,7 @@ out
 dist
 *.tgz
 
-generated/prisma
+src/infra/database/generated/
 
 # code coverage
 coverage
