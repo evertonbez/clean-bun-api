@@ -1,5 +1,7 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { boardSchema, createBoardSchema } from "./schema";
+import { ListBoardsUsecase } from "@/application/usecases/board/list-boards.usecase";
+import { container } from "tsyringe";
 
 const app = new OpenAPIHono();
 
@@ -24,9 +26,13 @@ app.openapi(
     },
   }),
   async (c) => {
+    const usecase = container.resolve(ListBoardsUsecase);
+
+    const boards = await usecase.execute();
+
     return c.json(
       {
-        data: [],
+        data: boards,
       },
       200
     );

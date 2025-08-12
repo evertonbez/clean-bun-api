@@ -1,10 +1,10 @@
 import { container } from "tsyringe";
 import "@/infra/providers";
-import { PrismaAccountRepository } from "@/infra/database/repositories/prisma_account_repository";
-import type { IAccountRepository } from "@/domain/repositories/account_repository";
+import type { IBoardRepository } from "@/domain/repositories/board_repository";
+import { PrismaBoardRepository } from "@/infra/database/repositories/prisma_board_repository";
 
-export const AccountRepositoryToken = Symbol("AccountRepository");
-container.registerSingleton<IAccountRepository>(
-  AccountRepositoryToken,
-  PrismaAccountRepository
+export const BoardRepositoryToken = Symbol("BoardRepository");
+container.registerSingleton<IBoardRepository>(
+  BoardRepositoryToken,
+  PrismaBoardRepository
 );
