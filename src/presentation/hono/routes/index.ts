@@ -4,6 +4,10 @@ import { authRouter } from "./auth";
 
 const routers = new OpenAPIHono();
 
-routers.route("/", authRouter).route("/accounts", accountRouter);
+// Public routes
+routers.route("/api/auth", authRouter);
+
+// Private routes
+routers.route("/accounts", accountRouter);
 
 export { routers };
