@@ -5,7 +5,7 @@ import { withAuth } from "./auth";
 export const protectedMiddleware: MiddlewareHandler[] = [
   withAuth,
   rateLimiter({
-    windowMs: 1 * 60 * 1000, // 10 minutes
+    windowMs: 1 * 60 * 1000, // 1 minute
     limit: 60,
     keyGenerator: (c) => c.get("session")?.user?.id ?? "unknown",
     statusCode: 429,
